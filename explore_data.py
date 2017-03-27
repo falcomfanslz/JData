@@ -12,6 +12,7 @@ PRODUCT_FILE = "data/JData_Product.csv"
 USER_FILE = "data/JData_User.csv"
 NEW_USER_FILE = "data/JData_User_New.csv"
 
+# Display format
 pd.options.display.float_format = '{:,.3f}'.format
 
 
@@ -39,7 +40,7 @@ def tranform_user_age():
     min_date = min(df['user_reg_dt'])
     df['user_reg_diff'] = [int(i.days) for i in (df['user_reg_dt'] - min_date)]
 
-    df.to_csv(NEW_USER_FILE)
+    df.to_csv(NEW_USER_FILE, index=False)
 
 
 def explore_user():
@@ -66,8 +67,10 @@ def explore_action_02(chunk_size=100000):
             print("Iteration is stopped")
 
     df = pd.concat(chunks, ignore_index=True)
-    print(df.head(100))
+    print(df.head(5))
+    print(df.dtypes)
 
+    print(df[df["user_id"] == 27630])
 
 # explore_user()
 explore_action_02()
